@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>fadeIn demo</title>
+  <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+
+  <!-- /assets/stylesheet/view.scss -->
+  <style>
+  #wrapper{
+    width  : 550px;
+    height: 600px;
+    top : 40px;
+    margin:10px auto 0 auto;
+    background-color: #fff;
+  }
+
+  #main{
+    position: relative;
+    margin: 0 auto;
+    top : 10px;
+    background: #ccc url('./bg.png');
+    width: 500px;
+    height: 384px;
+    opacity: 1;
+  }
+  #main p{
+    text-align: center;
+    opacity: 0;
+    margin-top:10px;
+    margin-bottom: 10px;
+    font-family: 'Do Hyeon', sans-serif;
+  }
+  #main .layer {
+    position: relative;
+    width : 100%;
+    height: 100%;
+    background: #fff;
+    opacity: 0.3;
+  }
+  #firstCol {
+    font-size: 80px;
+  }
+  #secondCol {
+    font-size: 20px;
+  }
+  #textWrapper{
+    position: absolute;
+    top:100px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .triangle_down {
+    top: -30px;
+    position: relative;
+    margin: 0 auto;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-right: 17px solid transparent;  
+    border-left: 17px solid transparent; 
+    border-top: 25px solid #000;
+    opacity: 0;
+  }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+ 
+<!-- view.html -->
+<div id="wrapper">
+  <div id="main">
+    <div class="layer"></div>
+    <div id="textWrapper">
+      <p id = "firstCol">나만 믿어!</p>
+      <p id = "secondCol">좋은 곳 추천해줄게ㅎ</p>
+    </div>
+  </div>
+  <div id = "3" class="triangle_down"></div>
+</div>
+
+
+
+<!-- /assets/javascript/view.coffee -->
+<script>
+function swing() {
+  $('.triangle_down').animate({'top':'-30px'},600).animate({'top':'-35px'},600, swing);
+}
+$(document).ready(function(){
+  $('#main .layer').animate({'opacity' : 0},800).promise().then(function(){
+    $('#firstCol').animate({opacity:1},1500).promise();
+    $('#secondCol').delay(800).animate({opacity:1},1500).promise();
+    $('#3').delay(1000).animate({opacity:1},1000).promise();
+  }).then(function(){
+    $('#main .layer').delay(2000).animate({'opacity' : 0.25},1500).promise();  
+  });
+  swing();
+});
+
+$('#3').click(function(){
+   alert("완료!");
+});
+</script>
+ 
+
+
+</body>
+</html>
